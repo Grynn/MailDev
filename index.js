@@ -21,8 +21,8 @@ module.exports = function(config) {
     // CLI
     config = program
       .version(version)
-      .option('-s, --smtp [port]', 'SMTP port to catch emails [1025]', '1025')
-      .option('-w, --web [port]', 'Port to run the Web GUI [1080]', '1080')
+      .option('-s, --smtp [port]', 'SMTP port to catch emails [25]', '25')
+      .option('-w, --web [port]', 'Port to run the Web GUI [8000]', '8000')
       .option('--outgoing-host <host>', 'SMTP host for outgoing emails')
       .option('--outgoing-port <port>', 'SMTP port for outgoing emails')
       .option('--outgoing-user <user>', 'SMTP user for outgoing emails')
@@ -56,7 +56,7 @@ module.exports = function(config) {
   }
   web.listen( config.web );
 
-  logger.info('MailDev app running at 127.0.0.1:%s', config.web);
+  logger.info('MailDev app running at 0.0.0.0:%s', config.web);
 
   if (config.open){
     var open = require('open');
