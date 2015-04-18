@@ -117,8 +117,8 @@ app.controller('ItemCtrl', [
     $scope.delete = function(item) {
 
       Email.delete({ id: item.id }, function(email) {
-        $rootScope.$emit('Refresh');
         $location.path('/');
+        $scope.items.splice($scope.items.indexOf($scope.items.filter(function(item_){return item.id==item_.id})[0]),1);
       });
 
     };
