@@ -1,6 +1,7 @@
 # MailDev
 
-[![NPM version](https://badge.fury.io/js/maildev.png)](http://badge.fury.io/js/maildev)
+[![Build Status](https://api.travis-ci.org/djfarrelly/MailDev.svg)](https://travis-ci.org/djfarrelly/MailDev)
+[![NPM Version](https://img.shields.io/npm/v/maildev.svg)](https://www.npmjs.com/package/maildev)
 
 **MailDev** is a simple way to test your project's generated emails during development with an easy to use web interface that runs on your machine built on top of [Node.js](http://www.nodejs.org).
 
@@ -13,19 +14,26 @@
 
 If you want to use MailDev with [Docker](https://www.docker.com/), you can use the ['djfarrelly/maildev' image on Docker Hub](https://registry.hub.docker.com/u/djfarrelly/maildev/).
 
+For convenient use with Grunt, try [grunt-maildev](https://github.com/xavierpriour/grunt-maildev).
+
 ## Usage
 
     maildev [options]
 
       -h, --help              output usage information
       -V, --version           output the version number
-      -s, --smtp [port]       SMTP port to catch emails [1025]
-      -w, --web [port]        Port to run the Web GUI [1080]
+      -s, --smtp <port>       SMTP port to catch emails [1025]
+      -w, --web <port>        Port to run the Web GUI [1080]
+      --ip <ip address>       IP Address to bind services to [0.0.0.0]
       --outgoing-host <host>  SMTP host for outgoing emails
       --outgoing-port <port>  SMTP port for outgoing emails
       --outgoing-user <user>  SMTP user for outgoing emails
       --outgoing-pass <pass>  SMTP password for outgoing emails
       --outgoing-secure       Use SMTP SSL for outgoing emails
+      --incoming-user <user>  SMTP user for incoming emails
+      --incoming-pass <pass>  SMTP password for incoming emails
+      --web-user <user>       HTTP basic auth username
+      --web-pass <pass>       HTTP basic auth password
       -o, --open              Open the Web GUI after startup
       -v, --verbose
 
@@ -38,6 +46,8 @@ MailDev can be used in your Node.js application. For more info view the
 var MailDev = require('maildev');
 
 var maildev = new MailDev();
+
+maildev.listen();
 
 maildev.on('new', function(email){
   // We got a new email!
@@ -120,42 +130,11 @@ To run **MailDev** during development:
 
 The `grunt dev` task will run the project using nodemon and restart automatically when changes are detected. SASS files will be compiled automatically on save also. To trigger some emails for testing run `node test/send.js` in a separate shell. Please run jshint to your lint code before submitting a pull request; run `grunt jshint`.
 
-To run the test suite, use [Mocha](http://visionmedia.github.io/mocha/):
+To run the test suite:
 
-    $ npm install -g mocha
-    $ mocha
+    $ npm run test
 
-## Changelog
-
-0.9.1 - Display unread count in the title
-
-0.9.0 - Add ability to download `.eml` files
-
-0.8.1 - Fix temp directory bug introduced in 0.8.0
-
-0.8.0 - Add view email source. Fix running multiple instances.
-
-0.7.0 - Add Docker support
-
-0.6.3 - Add auto-show new email. UI adjustments.
-
-0.6.2 - Fix module entry point. Bug fixes.
-
-0.6.1 - Bug fixes and improvements
-
-0.6.0 - Add relay option to send outgoing emails. Refactor for new API.
-
-0.5.2 - Lock down dependency versions
-
-0.5.1 - Fix menu layout issue in Safari
-
-0.5.0 - Add command line interface. Web UI redesign.
-
-0.4.0 - Add ability to receive and view attachments
-
-0.3.1 - Add Socket.io for immediate email arrival to interface
-
-0.3.0 - Initial open source release
+## [Changelog](https://github.com/djfarrelly/MailDev/releases)
 
 ## Thanks
 
