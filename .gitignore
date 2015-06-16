@@ -7,3 +7,4 @@ maildev-*
 settings.json
 *.sublime-*
 .nodemonignore
+gen.sh
